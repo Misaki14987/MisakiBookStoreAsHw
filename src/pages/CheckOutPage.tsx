@@ -6,9 +6,10 @@ const CheckoutPage: React.FC = () => {
   const cart = useCartStore((state) => state.cart);
   const totalPrice = cart.reduce((total, book) => total + book.price, 0);
   const navigate = useNavigate();
-
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
   const handleOrderSubmit = () => {
     alert('购买成功( •̀ ω •́ )y');
+    cart.forEach((book) => removeFromCart(book.id));
     navigate('/');
   };
 

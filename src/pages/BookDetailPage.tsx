@@ -2,6 +2,7 @@ import React from 'react';
 import { useOneBook } from '../api/booksAPI';
 import { useParams,Link } from "react-router-dom";
 import useCartStore from '../store/cartStore';
+import { Button } from 'antd';
 
 const BookDetailPage: React.FC = () => {
   const { id } = useParams<{id: string}>();
@@ -18,17 +19,22 @@ const BookDetailPage: React.FC = () => {
     return <div>BAKA,没有这本书</div>;
   }
 
+  const handleAddToCartAndAlert = (book:any) =>{
+    addToCart(book);
+    alert('加入购物车了( •̀ ω •́ )y');
+  }
+
 return <div>
   <h1>{book.title}</h1>
   <p>Author:{book.author}</p>
   <p>Price:{book.price}</p>
-  <button onClick={()=> addToCart(book)}>Add to Cart!</button>
+  <button onClick={() => handleAddToCartAndAlert(book)}>Add to Cart!</button>
   <Link to ="/cart">
-    <button>Check your cart</button>
+    <Button>Check your cart</Button>
   </Link>
   <div style={{ padding: '15rem' }}>
   <Link to ="/">
-    <button>Return to HomePage</button>
+    <Button>返回主页喵~</Button>
   </Link>
   </div>
 </div>
